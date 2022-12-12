@@ -14,9 +14,22 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from register.models import User
 from .models import *
 from agri.views import *
+from gov.views import *
+from agri.form import *
 
-def home(r):
-    return render(r,'home/home.html')
+def home(request):
+    model = AgriSelect()
+    form = AgriForms(request.POST, request.FILES, instance=model)
+    if request.POST:
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+        else:
+            print(form.errors)
+    ctx = {
+        "form": form
+    }
+    return render(request, 'home/home.html', ctx)
 
 class ClientRegistration(View):
     def setup(self, request, *args, **kwargs):
@@ -65,7 +78,7 @@ class ClientLogin(View):
             user = authenticate(username=form.cleaned_data["username"], password=form.cleaned_data["password"])
             if not user is None:
                 login(request, user)
-                messages.success(request, ("Xush kelibsiz, {}!".format(user.username)))
+                # messages.success(request, ("Xush kelibsiz, {}!".format(user.username)))
                 return redirect("home")
             form.add_error("password", ("Login yoki parol notoʻgʻri."))
         return render(request, "login/index2.html", {
@@ -74,7 +87,6 @@ class ClientLogin(View):
 
 @login_required
 def clinet_logout(request):
-    messages.success(request, "Xayr {}!".format(request.user.username))
     logout(request)
     request.button_title = _("Saqlash")
     return redirect("index")
@@ -97,7 +109,7 @@ class XokimyatLogin(View):
             user = authenticate(username=form.cleaned_data["username"], password=form.cleaned_data["password"])
             if not user is None:
                 login(request, user)
-                messages.success(request, ("Xush kelibsiz, {}!".format(user.username)))
+                # messages.success(request, ("Xush kelibsiz, {}!".format(user.username)))
                 return redirect("dashboard")
             form.add_error("password", ("Login yoki parol notoʻgʻri."))
         return render(request, "login/index3.html", {
