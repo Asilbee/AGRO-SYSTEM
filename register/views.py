@@ -15,6 +15,9 @@ from register.models import User
 from .models import *
 from agri.views import *
 
+def index(r):
+    return render(r,'home/home.html')
+
 
 class ClientRegistration(View):
     def setup(self, request, *args, **kwargs):
@@ -36,7 +39,7 @@ class ClientRegistration(View):
             user.save()
 
             messages.success(request, ("Siz muvaffaqiyatli ro'yxatdan o'tdingiz !! "))
-            return redirect('home')
+            return redirect('index')
 
 
         return render(request, 'login/index.html', {
@@ -65,18 +68,17 @@ class ClientLogin(View):
                 login(request, user)
                 messages.success(request, ("Xush kelibsiz, {}!".format(user.username)))
 
-                return redirect("home")
+                return redirect("index")
 
-            form.add_error("password", ("Login va/yoki parol notoʻgʻri."))
+            form.add_error("password", ("Login yoki parol notoʻgʻri."))
 
-        return render(request, "login/index.html", {
+        return render(request, "layouts/form.html", {
             "form": form
         })
-
 
 @login_required
 def clinet_logout(request):
     messages.success(request, "Xayr {}!".format(request.user.username))
     logout(request)
     request.button_title = _("Saqlash")
-    return redirect("home")
+    return redirect("loginn")
