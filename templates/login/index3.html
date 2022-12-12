@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <!-- Design by foolishdeveloper.com -->
-    <title>DEXQON Registratsiya</title>
+    <title>DEXQON LOGIN</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -152,26 +152,20 @@
 </head>
 {% load crispy_forms_filters %}
 <body>
-<div style="margin-top: 4rem">
 <div class="background">
     <div class="shape"></div>
     <div class="shape"></div>
 </div>
-
-    <form action="">
-
-    </form>
-
 <form class="row g-3" action="{% block url %}{% endblock %}" method="post">
-    <h3>Registratsiya</h3>
+    <h3>Login</h3>
 
     {% csrf_token %}
     {{ form | crispy }}
-     <b><a style="margin-left: 4.5rem" href="{% url 'login' %}">Men Avval Utganman</a></button>
-    <button type="submit">Log In</button>
+    <b><a style="margin-left: 4rem" href="{% url 'registration' %}">Men Avval Utmaganman</a></button>
+        <button type="submit">Log In</button>
 </form>
 
-</div>
+
 </body>
 </html>
 

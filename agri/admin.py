@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
+
+admin.site.register(Hudud)
+admin.site.register(Tuman)
+admin.site.register(AgriSelect)

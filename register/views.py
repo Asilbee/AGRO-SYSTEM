@@ -15,9 +15,8 @@ from register.models import User
 from .models import *
 from agri.views import *
 
-def index(r):
+def home(r):
     return render(r,'home/home.html')
-
 
 class ClientRegistration(View):
     def setup(self, request, *args, **kwargs):
@@ -39,7 +38,7 @@ class ClientRegistration(View):
             user.save()
 
             messages.success(request, ("Siz muvaffaqiyatli ro'yxatdan o'tdingiz !! "))
-            return redirect('index')
+            return redirect('home')
 
 
         return render(request, 'login/index.html', {
@@ -56,7 +55,7 @@ class ClientLogin(View):
         request.title = ("Tizimga kirish")
 
     def get(self, request):
-        return render(request, "login/index.html", {
+        return render(request, "login/index2.html", {
             "form": LoginForm()
         })
 
@@ -67,12 +66,9 @@ class ClientLogin(View):
             if not user is None:
                 login(request, user)
                 messages.success(request, ("Xush kelibsiz, {}!".format(user.username)))
-
-                return redirect("index")
-
+                return redirect("home")
             form.add_error("password", ("Login yoki parol notoʻgʻri."))
-
-        return render(request, "layouts/form.html", {
+        return render(request, "login/index2.html", {
             "form": form
         })
 
@@ -81,4 +77,29 @@ def clinet_logout(request):
     messages.success(request, "Xayr {}!".format(request.user.username))
     logout(request)
     request.button_title = _("Saqlash")
-    return redirect("loginn")
+    return redirect("index")
+
+
+class XokimyatLogin(View):
+    def setup(self, request, *args, **kwargs):
+        super().setup(request, *args, **kwargs)
+
+        request.title = ("Tizimga kirish")
+
+    def get(self, request):
+        return render(request, "login/index2.html", {
+            "form": LoginForm()
+        })
+
+    def post(self, request):
+        form = LoginForm(data=request.POST)
+        if form.is_valid():
+            user = authenticate(username=form.cleaned_data["username"], password=form.cleaned_data["password"])
+            if not user is None:
+                login(request, user)
+                messages.success(request, ("Xush kelibsiz, {}!".format(user.username)))
+                return redirect("dashboard")
+            form.add_error("password", ("Login yoki parol notoʻgʻri."))
+        return render(request, "login/index3.html", {
+            "form": form
+        })

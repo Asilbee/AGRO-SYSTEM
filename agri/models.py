@@ -1,40 +1,4 @@
 from django.db import models
-import datetime
-
-from django.db import models
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from django import forms
-
-
-class UserCreateForm(UserCreationForm):
-    phone = forms.IntegerField(required=True, label='Phone', error_messages={'exists': 'This Already Exists'})
-
-    class Meta:
-        model = User
-        fields = ('username', 'phone', 'password1', 'password2')
-
-    def __init__(self, *args, **kwargs):
-        super(UserCreateForm, self).__init__(*args, **kwargs)
-
-        self.fields['username'].widget.attrs['placeholder'] = 'User Name'
-        self.fields['phone'].widget.attrs['placeholder'] = 'Phone'
-        self.fields['password1'].widget.attrs['placeholder'] = 'Password'
-        self.fields['password2'].widget.attrs['placeholder'] = 'confirm Password'
-
-    def save(self, commit=True):
-        user = super(UserCreateForm, self).save(commit=False)
-        user.phone = self.cleaned_data['phone']
-        if commit:
-            user.save()
-        return user
-
-    def clean_email(self):
-        if User.objects.filter(phone=self.cleaned_data['phone']).exists():
-            raise forms.ValidationError(self.fields['phone'].error_massage['exists'])
-        return self.cleaned_data['phone']
-
-
 
 # Create your models here.
 class Hudud(models.Model):
