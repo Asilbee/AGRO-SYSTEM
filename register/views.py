@@ -16,18 +16,19 @@ from .models import *
 from agri.views import *
 from gov.views import *
 from agri.form import *
-
+from AGRI_SYSTEM.urls import *
 def home(request):
     model = AgriSelect()
     form = AgriForms(request.POST, request.FILES, instance=model)
     if request.POST:
         if form.is_valid():
+
             form.save()
-            return redirect('index')
+            return redirect('page')
         else:
             print(form.errors)
     ctx = {
-        "form": form
+        "form": form,
     }
     return render(request, 'home/home.html', ctx)
 
@@ -99,7 +100,7 @@ class XokimyatLogin(View):
         request.title = ("Tizimga kirish")
 
     def get(self, request):
-        return render(request, "login/index2.html", {
+        return render(request, "login/index3.html", {
             "form": LoginForm()
         })
 

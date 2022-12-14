@@ -15,5 +15,3 @@ def home(request):
 
 def page(r):
     return render(r,'home/page.html')
-
-

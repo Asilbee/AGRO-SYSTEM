@@ -1,0 +1,5 @@
+.input-style input {
+    width: 500px;
+    height: 10px;
+    outline: none !important;
+}
